@@ -33,19 +33,34 @@ const categories = [
 export default function HomePage() {
   return (
     <main>
-      <section className="hero">
-        <div className="container">
-          <span className="eyebrow">● Free online tools</span>
-          <h1>Free Online Tools &amp; Calculators</h1>
-          <p>Useful tools. Simple answers.</p>
-          <p>
-            HISABLY brings free online calculators, converters, developer utilities
-            and everyday tools together in one fast, clean workspace.
-          </p>
+      <section className="home-hero">
+        <div className="container home-hero-inner">
+          <div className="home-hero-copy">
+            <span className="eyebrow">● Free online tools</span>
+            <h1>Free Online Tools &amp; Calculators</h1>
+            <p className="tagline">Useful tools. Simple answers.</p>
+            <p className="description">
+              HISABLY brings free online calculators, converters, developer utilities
+              and everyday tools together in one fast, clean workspace.
+            </p>
+          </div>
+          <div className="home-hero-visual" aria-hidden="true">
+            <div className="home-orb">
+              <div className="home-orb-mark">HISA<span>BLY</span></div>
+            </div>
+            <div className="home-float one">
+              <strong>120+ tools</strong>
+              <span>Built for everyday work</span>
+            </div>
+            <div className="home-float two">
+              <strong>Fast &amp; simple</strong>
+              <span>Clear results, less clutter</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="home-tools">
         <div className="container">
           <div className="section-head">
             <h2>Explore tools</h2>
