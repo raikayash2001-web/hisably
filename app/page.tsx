@@ -36,10 +36,11 @@ export default function HomePage() {
       <section className="hero">
         <div className="container">
           <span className="eyebrow">● Free online tools</span>
-          <h1>Useful tools.<br />Simple answers.</h1>
+          <h1>Free Online Tools &amp; Calculators</h1>
+          <p>Useful tools. Simple answers.</p>
           <p>
-            HISABLY brings calculators, converters, developer utilities and everyday
-            tools together in one fast, clean workspace.
+            HISABLY brings free online calculators, converters, developer utilities
+            and everyday tools together in one fast, clean workspace.
           </p>
         </div>
       </section>
