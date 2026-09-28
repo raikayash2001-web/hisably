@@ -61,10 +61,10 @@ export default function GstCalculator() {
   return (
     <section className="calculator" aria-label="GST Calculator">
       <div className="tabs">
-        <button className={`tab ${mode === "add" ? "active" : ""}`} onClick={() => setMode("add")}>
+        <button type="button" aria-pressed={mode === "add"} className={`tab ${mode === "add" ? "active" : ""}` onClick={() => setMode("add")}>
           Add GST
         </button>
-        <button className={`tab ${mode === "remove" ? "active" : ""}`} onClick={() => setMode("remove")}>
+        <button type="button" aria-pressed={mode === "remove"} className={`tab ${mode === "remove" ? "active" : ""}` onClick={() => setMode("remove")}>
           Remove / Reverse GST
         </button>
       </div>
@@ -123,7 +123,7 @@ export default function GstCalculator() {
         )}
       </div>
 
-      <button className="calculate" onClick={() => setAmount(String(value))}>
+      <button type="button" className="calculate" onClick={() => setAmount(String(value))}>
         Calculate GST
       </button>
 
@@ -140,8 +140,8 @@ export default function GstCalculator() {
         )}
         <div className="result-row total"><span>Total Amount</span><strong>{money(result.total)}</strong></div>
         <div className="result-actions">
-          <button className="secondary" onClick={copyResult}>{copied ? "Copied ✓" : "Copy Result"}</button>
-          <button className="secondary" onClick={reset}>Reset</button>
+          <button type="button" className="secondary" aria-label="Copy GST calculation result" onClick={copyResult}>{copied ? "Copied ✓" : "Copy Result"}</button>
+          <button type="button" className="secondary" aria-label="Reset GST calculator" onClick={reset}>Reset</button>
         </div>
       </div>
     </section>
