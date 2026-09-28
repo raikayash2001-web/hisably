@@ -61,10 +61,10 @@ export default function GstCalculator() {
   return (
     <section className="calculator" aria-label="GST Calculator">
       <div className="tabs">
-        <button type="button" aria-pressed={mode === "add"} className={`tab ${mode === "add" ? "active" : ""}` onClick={() => setMode("add")}>
+        <button type="button" aria-pressed={mode === "add"} className={`tab ${mode === "add" ? "active" : ""}`} onClick={() => setMode("add")}>
           Add GST
         </button>
-        <button type="button" aria-pressed={mode === "remove"} className={`tab ${mode === "remove" ? "active" : ""}` onClick={() => setMode("remove")}>
+        <button type="button" aria-pressed={mode === "remove"} className={`tab ${mode === "remove" ? "active" : ""}`} onClick={() => setMode("remove")}>
           Remove / Reverse GST
         </button>
       </div>
@@ -97,6 +97,7 @@ export default function GstCalculator() {
         <div className="rate-row">
           {presetRates.map((item) => (
             <button
+              type="button"
               key={item}
               className={`rate ${customRate === "" && rate === item ? "active" : ""}`}
               onClick={() => { setRate(item); setCustomRate(""); }}
@@ -105,6 +106,7 @@ export default function GstCalculator() {
             </button>
           ))}
           <button
+            type="button"
             className={`rate ${customRate !== "" ? "active" : ""}`}
             onClick={() => setCustomRate(customRate || "18")}
           >
