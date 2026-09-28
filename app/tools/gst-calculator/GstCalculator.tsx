@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useMemo, useState } from "react";
 
@@ -14,7 +14,7 @@ function money(value: number) {
 
 export default function GstCalculator() {
   const [mode, setMode] = useState<"add" | "remove">("add");
-  const [amount, setAmount] = useState("10000");
+  const [amount, setAmount] = useState("15000");
   const [rate, setRate] = useState(18);
   const [customRate, setCustomRate] = useState("");
   const [supply, setSupply] = useState<"intra" | "inter">("intra");
@@ -60,91 +60,91 @@ export default function GstCalculator() {
 
   return (
     <section className="calculator" aria-label="GST Calculator">
+      <div className="calculator-heading">
+        <h2>Calculate GST Easily</h2>
+        <p>Add or remove GST from an amount and instantly see the tax breakdown.</p>
+      </div>
+
       <div className="tabs">
         <button type="button" aria-pressed={mode === "add"} className={`tab ${mode === "add" ? "active" : ""}`} onClick={() => setMode("add")}>
           Add GST
         </button>
         <button type="button" aria-pressed={mode === "remove"} className={`tab ${mode === "remove" ? "active" : ""}`} onClick={() => setMode("remove")}>
-          Remove / Reverse GST
+          Remove GST
         </button>
       </div>
 
       <div className="form-grid">
         <div className="field">
-          <label htmlFor="gst-amount">
-            {mode === "add" ? "Base Amount" : "GST-Inclusive Amount"}
-          </label>
+          <label htmlFor="gst-amount">{mode === "add" ? "Amount" : "GST-Inclusive Amount"}</label>
           <input
             id="gst-amount"
             inputMode="decimal"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder="10000"
+            placeholder="15000"
           />
         </div>
 
         <div className="field">
-          <label htmlFor="supply">Supply Type</label>
-          <select id="supply" value={supply} onChange={(e) => setSupply(e.target.value as "intra" | "inter")}>
-            <option value="intra">Intra-State (CGST + SGST)</option>
-            <option value="inter">Inter-State (IGST)</option>
+          <label htmlFor="gst-rate">GST Rate</label>
+          <select
+            id="gst-rate"
+            value={customRate !== "" ? "custom" : String(rate)}
+            onChange={(e) => {
+              if (e.target.value === "custom") setCustomRate(customRate || "18");
+              else {
+                setRate(Number(e.target.value));
+                setCustomRate("");
+              }
+            }}
+          >
+            {presetRates.map((item) => <option key={item} value={item}>{item}%</option>)}
+            <option value="custom">Custom</option>
           </select>
         </div>
       </div>
 
-      <div className="field" style={{ marginTop: 16 }}>
-        <label>GST Rate</label>
-        <div className="rate-row">
-          {presetRates.map((item) => (
-            <button
-              type="button"
-              key={item}
-              className={`rate ${customRate === "" && rate === item ? "active" : ""}`}
-              onClick={() => { setRate(item); setCustomRate(""); }}
-            >
-              {item}%
-            </button>
-          ))}
-          <button
-            type="button"
-            className={`rate ${customRate !== "" ? "active" : ""}`}
-            onClick={() => setCustomRate(customRate || "18")}
-          >
-            Custom
-          </button>
-        </div>
-        {customRate !== "" && (
+      {customRate !== "" && (
+        <div className="field custom-rate-field">
+          <label htmlFor="custom-gst-rate">Custom GST Rate</label>
           <input
-            style={{ marginTop: 9 }}
+            id="custom-gst-rate"
             inputMode="decimal"
             value={customRate}
             onChange={(e) => setCustomRate(e.target.value)}
             placeholder="Enter GST rate"
-            aria-label="Custom GST rate"
           />
-        )}
-      </div>
+        </div>
+      )}
 
-      <button type="button" className="calculate" onClick={() => setAmount(String(value))}>
-        Calculate GST
-      </button>
+      <div className="field supply-field">
+        <label htmlFor="supply">Tax Type</label>
+        <select id="supply" value={supply} onChange={(e) => setSupply(e.target.value as "intra" | "inter")}>
+          <option value="intra">Intra-State — CGST + SGST</option>
+          <option value="inter">Inter-State — IGST</option>
+        </select>
+      </div>
 
       <div className="result" aria-live="polite">
         <div className="result-row"><span>Base Amount</span><strong>{money(result.base)}</strong></div>
         <div className="result-row"><span>GST Amount</span><strong>{money(result.gst)}</strong></div>
         {supply === "intra" ? (
           <>
-            <div className="result-row"><span>CGST</span><strong>{money(result.gst / 2)}</strong></div>
-            <div className="result-row"><span>SGST</span><strong>{money(result.gst / 2)}</strong></div>
+            <div className="result-row"><span>CGST ({(activeRate / 2 || 0).toFixed(0)}%)</span><strong>{money(result.gst / 2)}</strong></div>
+            <div className="result-row"><span>SGST ({(activeRate / 2 || 0).toFixed(0)}%)</span><strong>{money(result.gst / 2)}</strong></div>
           </>
         ) : (
-          <div className="result-row"><span>IGST</span><strong>{money(result.gst)}</strong></div>
+          <div className="result-row"><span>IGST ({(activeRate || 0).toFixed(0)}%)</span><strong>{money(result.gst)}</strong></div>
         )}
         <div className="result-row total"><span>Total Amount</span><strong>{money(result.total)}</strong></div>
-        <div className="result-actions">
-          <button type="button" className="secondary" aria-label="Copy GST calculation result" onClick={copyResult}>{copied ? "Copied ✓" : "Copy Result"}</button>
-          <button type="button" className="secondary" aria-label="Reset GST calculator" onClick={reset}>Reset</button>
-        </div>
+      </div>
+
+      <div className="result-actions">
+        <button type="button" className="secondary primary-action" aria-label="Copy GST calculation result" onClick={copyResult}>
+          {copied ? "Copied ✓" : "Copy Result"}
+        </button>
+        <button type="button" className="secondary" aria-label="Reset GST calculator" onClick={reset}>Reset</button>
       </div>
     </section>
   );
