@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 390" role="img" aria-label="GST calculator and finance illustration">
+<defs>
+  <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#eceff3"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f3c85d"/><stop offset="1" stop-color="#c98b19"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="170%" height="170%"><feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#172033" flood-opacity=".16"/></filter>
+</defs>
+<g transform="translate(45 78) rotate(14 105 130)" filter="url(#shadow)">
+  <rect x="0" y="0" width="205" height="285" rx="27" fill="url(#body)" stroke="#dce1e8" stroke-width="2"/>
+  <rect x="22" y="25" width="161" height="58" rx="14" fill="#172033"/>
+  <text x="102" y="64" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="800" fill="#fff">GST</text>
+  <g fill="#f3ead5">
+    <rect x="24" y="104" width="45" height="40" rx="9"/><rect x="80" y="104" width="45" height="40" rx="9"/><rect x="136" y="104" width="45" height="40" rx="9"/>
+    <rect x="24" y="154" width="45" height="40" rx="9"/><rect x="80" y="154" width="45" height="40" rx="9"/><rect x="136" y="154" width="45" height="40" rx="9"/>
+    <rect x="24" y="204" width="45" height="40" rx="9"/><rect x="80" y="204" width="45" height="40" rx="9"/>
+  </g>
+  <g fill="#d59a22">
+    <rect x="136" y="204" width="45" height="91" rx="9"/>
+    <rect x="80" y="254" width="45" height="41" rx="9"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#5e6470" text-anchor="middle">
+    <text x="46" y="130">7</text><text x="102" y="130">8</text><text x="158" y="130">9</text>
+    <text x="46" y="180">4</text><text x="102" y="180">5</text><text x="158" y="180">+</text>
+    <text x="46" y="230">1</text><text x="102" y="230">2</text>
+  </g>
+  <text x="158" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="800" fill="#fff">+</text>
+</g>
+<g transform="translate(10 20)" filter="url(#shadow)">
+  <rect width="78" height="78" rx="18" fill="#fff" stroke="#eee3cb"/>
+  <path d="M20 54V39h10v15M35 54V30h10v24M50 54V21h10v33" fill="none" stroke="#d59a22" stroke-width="6" stroke-linecap="round"/>
+</g>
+</svg>
