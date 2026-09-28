@@ -419,4 +419,6 @@ button, input, select { font: inherit; }
   .ai-form button { min-height: 46px; }
   .ai-bubble { max-width: 88%; }
 }
-\n.primary-action { background: #d99b1d; color: #fff; border-color: #d99b1d; }\n.primary-action:hover { background: #c88e18; }\n
+
+.primary-action { background: #d99b1d; color: #fff; border-color: #d99b1d; }
+.primary-action:hover { background: #c88e18; }
