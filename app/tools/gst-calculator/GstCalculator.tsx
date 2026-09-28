@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-const presetRates = [3, 5, 12, 18, 28];
+const presetRates = [5, 18, 40];
 
 function money(value: number) {
   return new Intl.NumberFormat("en-IN", {
