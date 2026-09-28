@@ -212,13 +212,24 @@ button, input, select { font: inherit; }
 .calculator::before {
   content: "";
   position: absolute;
-  width: 110px;
-  height: 110px;
-  top: -55px;
-  left: -55px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(217,155,29,.16), rgba(217,155,29,0) 68%);
+  width: 235px;
+  height: 290px;
+  left: -245px;
+  top: 52px;
+  background: url("/gst-left-decor.svg") center / contain no-repeat;
   pointer-events: none;
+  z-index: -1;
+}
+.calculator::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 315px;
+  right: -260px;
+  top: 88px;
+  background: url("/gst-right-decor.svg") center / contain no-repeat;
+  pointer-events: none;
+  z-index: -1;
 }
 .calculator-heading {
   position: relative;
@@ -482,6 +493,16 @@ button, input, select { font: inherit; }
 @media (max-width: 800px) {
   .tool-grid { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
+}
+@media (max-width: 980px) {
+  .calculator::before,
+  .calculator::after { opacity: .42; }
+  .calculator::before { left: -150px; }
+  .calculator::after { right: -165px; }
+}
+@media (max-width: 700px) {
+  .calculator::before,
+  .calculator::after { display: none; }
 }
 @media (max-width: 560px) {
   .container { width: min(100% - 22px, 1120px); }
