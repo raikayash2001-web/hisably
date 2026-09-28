@@ -12,6 +12,11 @@ function money(value: number) {
   }).format(Number.isFinite(value) ? value : 0);
 }
 
+function rateLabel(value: number) {
+  if (!Number.isFinite(value)) return "0%";
+  return `${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2).replace(/0$/, "")}%`;
+}
+
 export default function GstCalculator() {
   const [mode, setMode] = useState<"add" | "remove">("add");
   const [amount, setAmount] = useState("15000");
@@ -131,11 +136,11 @@ export default function GstCalculator() {
         <div className="result-row"><span>GST Amount</span><strong>{money(result.gst)}</strong></div>
         {supply === "intra" ? (
           <>
-            <div className="result-row"><span>CGST ({(activeRate / 2 || 0).toFixed(0)}%)</span><strong>{money(result.gst / 2)}</strong></div>
-            <div className="result-row"><span>SGST ({(activeRate / 2 || 0).toFixed(0)}%)</span><strong>{money(result.gst / 2)}</strong></div>
+            <div className="result-row"><span>CGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
+            <div className="result-row"><span>SGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
           </>
         ) : (
-          <div className="result-row"><span>IGST ({(activeRate || 0).toFixed(0)}%)</span><strong>{money(result.gst)}</strong></div>
+          <div className="result-row"><span>IGST ({rateLabel(activeRate)})</span><strong>{money(result.gst)}</strong></div>
         )}
         <div className="result-row total"><span>Total Amount</span><strong>{money(result.total)}</strong></div>
       </div>
