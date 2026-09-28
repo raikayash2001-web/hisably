@@ -46,10 +46,10 @@ export default function HomePage() {
           </div>
           <div className="home-hero-visual" aria-hidden="true">
             <div className="home-orb">
-              <div className="home-orb-mark">HISA<span>BLY</span></div>
+              <div className="home-orb-mark">HISAB<span>LY</span></div>
             </div>
             <div className="home-float one">
-              <strong>120+ tools</strong>
+              <strong>Free tools</strong>
               <span>Built for everyday work</span>
             </div>
             <div className="home-float two">
