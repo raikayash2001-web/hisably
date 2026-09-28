@@ -31,7 +31,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <nav className="nav-links" aria-label="Primary navigation">
               <a href="/">Tools</a>
               <a href="/tools/gst-calculator/">Finance</a>
-              <a href="/ai/">HISABLY AI</a>
               <a href="/about/">About</a>
             </nav>
           </div>
@@ -41,7 +40,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="container footer-inner">
             <div>© {new Date().getFullYear()} HISABLY</div>
             <div className="footer-links">
-              <a href="/ai/">HISABLY AI</a>
               <a href="/about/">About</a>
               <a href="/contact/">Contact</a>
               <a href="/privacy/">Privacy</a>
