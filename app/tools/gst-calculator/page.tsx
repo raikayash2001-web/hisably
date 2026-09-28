@@ -91,7 +91,24 @@ export default function GstCalculatorPage() {
           <p>Calculate GST instantly with a simple, easy-to-use calculator.</p>
         </div>
 
-        <GstCalculator />
+        <div className="calculator-stage">
+          <div className="side-visual side-visual-left" aria-hidden="true">
+            <div className="gst-receipt">
+              <strong>GST</strong>
+              <span></span><span></span><span></span><span className="short"></span>
+              <b>%</b>
+            </div>
+          </div>
+
+          <GstCalculator />
+
+          <div className="side-visual side-visual-right" aria-hidden="true">
+            <div className="gst-calculator-illustration">
+              <div className="calc-screen">GST</div>
+              <div className="calc-keys"><i>7</i><i>8</i><i>+</i><i>4</i><i>5</i><i>−</i><i>1</i><i>2</i><i>=</i></div>
+            </div>
+          </div>
+        </div>
 
         <article className="content">
           <h2>What is a GST Calculator?</h2>
