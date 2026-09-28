@@ -29,6 +29,9 @@ Open http://localhost:3000
 
 ## Production test
 
+Vercel deployment is configured for the Phase 1 frontend-only build. No backend or AI API key is required for Phase 1.
+
+
 ```bash
 npm run build
 npm start
