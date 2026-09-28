@@ -18,7 +18,7 @@ function rateLabel(value: number) {
 }
 
 export default function GstCalculator() {
-  const [mode, setMode] = useState<"add" | "remove">("add");
+  const [mode, setMode] = useState<"add" | "remove" | "without">("add");
   const [amount, setAmount] = useState("15000");
   const [rate, setRate] = useState(18);
   const [customRate, setCustomRate] = useState("");
@@ -30,18 +30,26 @@ export default function GstCalculator() {
 
   const result = useMemo(() => {
     const r = Math.max(0, activeRate || 0);
+
+    if (mode === "without") {
+      return { base: value, gst: 0, total: value };
+    }
+
     if (mode === "add") {
       const gst = value * r / 100;
       return { base: value, gst, total: value + gst };
     }
+
     const base = r === 0 ? value : value / (1 + r / 100);
     return { base, gst: value - base, total: value };
   }, [activeRate, mode, value]);
 
   const copyResult = async () => {
-    const taxLine = supply === "intra"
-      ? `CGST: ${money(result.gst / 2)}\nSGST: ${money(result.gst / 2)}`
-      : `IGST: ${money(result.gst)}`;
+    const taxLine = mode === "without"
+      ? "GST: ₹0.00"
+      : supply === "intra"
+        ? `CGST: ${money(result.gst / 2)}\nSGST: ${money(result.gst / 2)}`
+        : `IGST: ${money(result.gst)}`;
 
     const text =
       `HISABLY GST Calculator\nBase Amount: ${money(result.base)}\nGST: ${money(result.gst)}\n${taxLine}\nTotal: ${money(result.total)}`;
@@ -67,7 +75,7 @@ export default function GstCalculator() {
     <section className="calculator" aria-label="GST Calculator">
       <div className="calculator-heading">
         <h2>Calculate GST Easily</h2>
-        <p>Add or remove GST from an amount and instantly see the tax breakdown.</p>
+        <p>Add, remove, or calculate an amount without GST and instantly see the tax breakdown.</p>
       </div>
 
       <div className="tabs">
@@ -77,11 +85,16 @@ export default function GstCalculator() {
         <button type="button" aria-pressed={mode === "remove"} className={`tab ${mode === "remove" ? "active" : ""}`} onClick={() => setMode("remove")}>
           Remove GST
         </button>
+        <button type="button" aria-pressed={mode === "without"} className={`tab ${mode === "without" ? "active" : ""}`} onClick={() => setMode("without")}>
+          Without GST
+        </button>
       </div>
 
       <div className="form-grid">
         <div className="field">
-          <label htmlFor="gst-amount">{mode === "add" ? "Amount" : "GST-Inclusive Amount"}</label>
+          <label htmlFor="gst-amount">
+            {mode === "remove" ? "GST-Inclusive Amount" : "Amount"}
+          </label>
           <input
             id="gst-amount"
             inputMode="decimal"
@@ -96,6 +109,7 @@ export default function GstCalculator() {
           <select
             id="gst-rate"
             value={customRate !== "" ? "custom" : String(rate)}
+            disabled={mode === "without"}
             onChange={(e) => {
               if (e.target.value === "custom") setCustomRate(customRate || "18");
               else {
@@ -110,7 +124,7 @@ export default function GstCalculator() {
         </div>
       </div>
 
-      {customRate !== "" && (
+      {customRate !== "" && mode !== "without" && (
         <div className="field custom-rate-field">
           <label htmlFor="custom-gst-rate">Custom GST Rate</label>
           <input
@@ -123,18 +137,22 @@ export default function GstCalculator() {
         </div>
       )}
 
-      <div className="field supply-field">
-        <label htmlFor="supply">Tax Type</label>
-        <select id="supply" value={supply} onChange={(e) => setSupply(e.target.value as "intra" | "inter")}>
-          <option value="intra">Intra-State — CGST + SGST</option>
-          <option value="inter">Inter-State — IGST</option>
-        </select>
-      </div>
+      {mode !== "without" && (
+        <div className="field supply-field">
+          <label htmlFor="supply">Tax Type</label>
+          <select id="supply" value={supply} onChange={(e) => setSupply(e.target.value as "intra" | "inter")}>
+            <option value="intra">Intra-State — CGST + SGST</option>
+            <option value="inter">Inter-State — IGST</option>
+          </select>
+        </div>
+      )}
 
       <div className="result" aria-live="polite">
         <div className="result-row"><span>Base Amount</span><strong>{money(result.base)}</strong></div>
         <div className="result-row"><span>GST Amount</span><strong>{money(result.gst)}</strong></div>
-        {supply === "intra" ? (
+        {mode === "without" ? (
+          <div className="result-row"><span>GST</span><strong>₹0.00</strong></div>
+        ) : supply === "intra" ? (
           <>
             <div className="result-row"><span>CGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
             <div className="result-row"><span>SGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
