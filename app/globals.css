@@ -329,6 +329,117 @@ button, input, select { font: inherit; }
   box-shadow: 0 5px 14px rgba(23,32,51,.04);
 }
 
+.calculator-stage {
+  position: relative;
+  width: 100%;
+}
+.side-visual {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.side-visual-left {
+  left: max(0px, calc(50% - 620px));
+  top: 105px;
+  transform: rotate(-8deg);
+}
+.side-visual-right {
+  right: max(0px, calc(50% - 620px));
+  top: 175px;
+  transform: rotate(9deg);
+}
+.gst-receipt {
+  position: relative;
+  width: 175px;
+  min-height: 235px;
+  padding: 28px 22px;
+  border-radius: 8px 8px 12px 12px;
+  background: linear-gradient(150deg,#fff,#f8f4eb);
+  border: 1px solid rgba(23,32,51,.08);
+  box-shadow: 0 24px 45px rgba(23,32,51,.13);
+}
+.gst-receipt::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -10px;
+  height: 20px;
+  background: linear-gradient(135deg, transparent 7px, #f8f4eb 0) 0 0/20px 20px repeat-x;
+}
+.gst-receipt strong {
+  display:block;
+  font-family:"Manrope",sans-serif;
+  font-size: 32px;
+  color:#64718a;
+  letter-spacing:-1px;
+  margin-bottom:20px;
+}
+.gst-receipt span {
+  display:block;
+  width:100%;
+  height:7px;
+  border-radius:99px;
+  background:#dfe3e9;
+  margin:13px 0;
+}
+.gst-receipt span.short { width:58%; }
+.gst-receipt b {
+  position:absolute;
+  right:-25px;
+  bottom:35px;
+  width:66px;
+  height:66px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:linear-gradient(145deg,#f5c45b,#d99b1d);
+  color:#fff;
+  font-size:27px;
+  box-shadow:0 12px 25px rgba(217,155,29,.28);
+}
+.gst-calculator-illustration {
+  width:150px;
+  padding:12px;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#f4eee3);
+  border:1px solid rgba(217,155,29,.22);
+  box-shadow:0 25px 45px rgba(23,32,51,.14);
+}
+.calc-screen {
+  padding:14px 10px;
+  border-radius:11px;
+  background:#172033;
+  color:#fff;
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:18px;
+  text-align:center;
+  margin-bottom:10px;
+}
+.calc-keys {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+.calc-keys i {
+  display:grid;
+  place-items:center;
+  height:31px;
+  border-radius:7px;
+  background:#f4e7cd;
+  color:#6b7180;
+  font-style:normal;
+  font-weight:700;
+  font-size:11px;
+}
+.calc-keys i:nth-child(3n) {
+  background:#d99b1d;
+  color:#fff;
+}
+@media (max-width: 1180px) {
+  .side-visual { display:none; }
+}
+
 .content {
   width: min(860px, 100%);
   margin: 42px auto 0;
