@@ -150,15 +150,15 @@ export default function GstCalculator() {
       <div className="result" aria-live="polite">
         <div className="result-row"><span>Base Amount</span><strong>{money(result.base)}</strong></div>
         <div className="result-row"><span>GST Amount</span><strong>{money(result.gst)}</strong></div>
-        {mode === "without" ? (
-          <div className="result-row"><span>GST</span><strong>₹0.00</strong></div>
-        ) : supply === "intra" ? (
-          <>
-            <div className="result-row"><span>CGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
-            <div className="result-row"><span>SGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
-          </>
-        ) : (
-          <div className="result-row"><span>IGST ({rateLabel(activeRate)})</span><strong>{money(result.gst)}</strong></div>
+        {mode !== "without" && (
+          supply === "intra" ? (
+            <>
+              <div className="result-row"><span>CGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
+              <div className="result-row"><span>SGST ({rateLabel(activeRate / 2)})</span><strong>{money(result.gst / 2)}</strong></div>
+            </>
+          ) : (
+            <div className="result-row"><span>IGST ({rateLabel(activeRate)})</span><strong>{money(result.gst)}</strong></div>
+          )
         )}
         <div className="result-row total"><span>Total Amount</span><strong>{money(result.total)}</strong></div>
       </div>
